@@ -25,7 +25,7 @@ class MyDrawer extends StatelessWidget {
           SizedBox(height: 10),
           //text
           Text(
-            'FunZ Shop',
+            'GYMSHARK',
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
           ),
           SizedBox(height: 30),

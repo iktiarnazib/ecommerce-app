@@ -16,29 +16,44 @@ class _ShopPageState extends ConsumerState<ShopPage> {
   @override
   Widget build(BuildContext context) {
     final allProducts = ref.watch(productProvider);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Shop Page '),
+        title: Text('GYMSHARK'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       drawer: MyDrawer(),
-      body: Expanded(
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: allProducts.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ProductTile(
-              onTap: () {
-                ref.read(cartProvider.notifier).addProduct(allProducts[index]);
+      body: ListView(
+        children: [
+          //subtitle
+          Padding(
+            padding: const EdgeInsets.only(top: 25.0, left: 30.0, right: 30.0),
+            child: FittedBox(
+              child: Center(
+                child: Text(
+                  'Train with purpose. Live with discipline.',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          SizedBox(
+            height: 600,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: allProducts.length,
+              padding: EdgeInsets.all(15),
+              itemBuilder: (BuildContext context, int index) {
+                return ProductTile(product: allProducts[index]);
               },
-              title: allProducts[index].name,
-              description: allProducts[index].description,
-              price: allProducts[index].price,
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }
