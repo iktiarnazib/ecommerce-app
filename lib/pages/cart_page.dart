@@ -97,3 +97,6 @@ class _CartPageState extends ConsumerState<CartPage> {
     );
   }
 }
+
+
+//cart page functional.

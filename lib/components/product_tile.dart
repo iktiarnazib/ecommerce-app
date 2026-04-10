@@ -12,35 +12,37 @@ class ProductTile extends ConsumerStatefulWidget {
 }
 
 class _ProductTileState extends ConsumerState<ProductTile> {
-  // void addToCart(BuildContext context, String name, Product product) {
-  //   final cartProduct = ref.watch(cartProvider);
-  //   //dialog box
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         title: Text('Add to Cart?'),
-  //         content: Text('Do you want to add $name product to your cart?'),
+  void addToCart(BuildContext context, String name) {
+    final cartProduct = ref.watch(cartProvider).toList();
+    //dialog box
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Add to Cart?'),
+          content: Text('Do you want to add $name product to your cart?'),
 
-  //         //no button
-  //         actions: [
-  //           MaterialButton(
-  //             onPressed: () => Navigator.pop(context),
-  //             child: Text('NO'),
-  //           ),
-  //           //yes button
-  //           MaterialButton(
-  //             onPressed: () {
-  //               Navigator.pop(context);
-  //             },
-
-  //             child: Text('YES'),
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
+          //no button
+          actions: [
+            MaterialButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('NO'),
+            ),
+            //yes button
+            MaterialButton(
+              onPressed: () {
+                if (!cartProduct.contains(widget.product)) {
+                  ref.watch(cartProvider.notifier).addProduct(widget.product);
+                }
+                Navigator.pop(context);
+              },
+              child: Text('YES'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +101,7 @@ class _ProductTileState extends ConsumerState<ProductTile> {
                 Expanded(child: SizedBox()),
                 GestureDetector(
                   onTap: () {
-                    if (!cartProduct.contains(widget.product)) {
-                      ref
-                          .read(cartProvider.notifier)
-                          .addProduct(widget.product);
-                    }
+                    addToCart(context, widget.product.name);
                   },
 
                   child: Container(
