@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 final class Product {
   final int id;
   final String name;
@@ -13,4 +15,12 @@ final class Product {
     required this.imagePath,
     // required this.imagePath,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Product && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
