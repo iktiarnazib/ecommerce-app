@@ -1,6 +1,5 @@
 import 'package:ecommerceapp/models/product.dart';
 import 'package:ecommerceapp/providers/cart_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,9 +12,41 @@ class ProductTile extends ConsumerStatefulWidget {
 }
 
 class _ProductTileState extends ConsumerState<ProductTile> {
+  void addToCart(BuildContext context, String name, Product product) {
+    final cartProduct = ref.watch(cartProvider);
+    //dialog box
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Add to Cart?'),
+          content: Text('Do you want to add $name product to your cart?'),
+
+          //no button
+          actions: [
+            MaterialButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('NO'),
+            ),
+            //yes button
+            MaterialButton(
+              onPressed: () {
+                if (!cartProduct.contains(widget.product)) {
+                  ref.read(cartProvider.notifier).addProduct(product);
+                }
+                Navigator.pop(context);
+              },
+
+              child: Text('YES'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final cartProduct = ref.watch(cartProvider);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
@@ -82,11 +113,7 @@ class _ProductTileState extends ConsumerState<ProductTile> {
                     padding: EdgeInsets.all(20),
                     child: IconButton(
                       onPressed: () {
-                        if (!cartProduct.contains(widget.product)) {
-                          ref
-                              .read(cartProvider.notifier)
-                              .addProduct(widget.product);
-                        }
+                        addToCart(context, widget.product.name, widget.product);
                       },
                       icon: Icon(Icons.add),
                       color: Colors.black,
