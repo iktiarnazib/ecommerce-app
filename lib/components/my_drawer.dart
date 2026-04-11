@@ -16,7 +16,7 @@ class MyDrawer extends StatelessWidget {
             margin: EdgeInsets.only(left: 30, right: 30),
             child: Center(
               child: Icon(
-                Icons.trolley,
+                Icons.sports_gymnastics,
                 size: 100,
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),

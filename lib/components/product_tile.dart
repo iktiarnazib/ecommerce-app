@@ -12,41 +12,39 @@ class ProductTile extends ConsumerStatefulWidget {
 }
 
 class _ProductTileState extends ConsumerState<ProductTile> {
-  void addToCart(BuildContext context, String name, Product product) {
-    final cartProduct = ref.watch(cartProvider);
-    //dialog box
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Add to Cart?'),
-          content: Text('Do you want to add $name product to your cart?'),
+  // void addToCart(BuildContext context, String name, Product product) {
+  //   final cartProduct = ref.watch(cartProvider);
+  //   //dialog box
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: Text('Add to Cart?'),
+  //         content: Text('Do you want to add $name product to your cart?'),
 
-          //no button
-          actions: [
-            MaterialButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('NO'),
-            ),
-            //yes button
-            MaterialButton(
-              onPressed: () {
-                if (!cartProduct.contains(widget.product)) {
-                  ref.read(cartProvider.notifier).addProduct(product);
-                }
-                Navigator.pop(context);
-              },
+  //         //no button
+  //         actions: [
+  //           MaterialButton(
+  //             onPressed: () => Navigator.pop(context),
+  //             child: Text('NO'),
+  //           ),
+  //           //yes button
+  //           MaterialButton(
+  //             onPressed: () {
+  //               Navigator.pop(context);
+  //             },
 
-              child: Text('YES'),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  //             child: Text('YES'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final cartProduct = ref.watch(cartProvider);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
@@ -99,25 +97,24 @@ class _ProductTileState extends ConsumerState<ProductTile> {
               children: [
                 Text('\$${widget.product.price}'),
                 Expanded(child: SizedBox()),
-                GestureDetector(
-                  onTap: () {
-                    ref.read(cartProvider.notifier).addProduct(widget.product);
-                  },
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
 
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-
-                    padding: EdgeInsets.all(20),
-                    child: IconButton(
-                      onPressed: () {
-                        addToCart(context, widget.product.name, widget.product);
-                      },
-                      icon: Icon(Icons.add),
-                      color: Colors.black,
-                    ),
+                  padding: EdgeInsets.all(20),
+                  child: IconButton(
+                    onPressed: () {
+                      // addToCart(context, widget.product.name, widget.product);
+                      if (!cartProduct.contains(widget.product)) {
+                        ref
+                            .read(cartProvider.notifier)
+                            .addProduct(widget.product);
+                      }
+                    },
+                    icon: Icon(Icons.add),
+                    color: Colors.black,
                   ),
                 ),
               ],
