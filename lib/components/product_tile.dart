@@ -18,10 +18,9 @@ class _ProductTileState extends ConsumerState<ProductTile> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           title: Text('Add to Cart?'),
           content: Text('Do you want to add $name product to your cart?'),
-
           //no button
           actions: [
             MaterialButton(
@@ -106,11 +105,11 @@ class _ProductTileState extends ConsumerState<ProductTile> {
 
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                       color: Theme.of(context).colorScheme.surface,
                     ),
 
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(12),
                     child: Icon(Icons.add),
                   ),
                 ),

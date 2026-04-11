@@ -28,7 +28,7 @@ class _ShopPageState extends ConsumerState<ShopPage> {
             onPressed: () {
               Navigator.pushNamed(context, 'cartPage');
             },
-            icon: Icon(Icons.shopping_bag),
+            icon: Icon(Icons.shopping_cart_outlined),
           ),
         ],
       ),

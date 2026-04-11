@@ -32,7 +32,7 @@ class _IntroPageState extends ConsumerState<IntroPage> {
             //subtitle
             FittedBox(
               child: Text(
-                'Premium Quality Shop',
+                'Be Great, Do Great',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary,
                   fontSize: 14,
