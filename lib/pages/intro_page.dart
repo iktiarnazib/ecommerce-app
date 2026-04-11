@@ -19,12 +19,16 @@ class _IntroPageState extends ConsumerState<IntroPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //logo
-            Icon(Icons.trolley, size: 100, color: Colors.grey.shade900),
+            Icon(
+              Icons.sports_gymnastics,
+              size: 100,
+              color: Colors.grey.shade900,
+            ),
             SizedBox(height: 15),
             //title
             FittedBox(
               child: Text(
-                'FunZ Shop',
+                'GYMSHARK',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
@@ -32,7 +36,7 @@ class _IntroPageState extends ConsumerState<IntroPage> {
             //subtitle
             FittedBox(
               child: Text(
-                'Premium Quality Shop',
+                'Do More Amazing Sh*t',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.inversePrimary,
                   fontSize: 14,
